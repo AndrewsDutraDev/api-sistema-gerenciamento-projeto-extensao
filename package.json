@@ -1,0 +1,34 @@
+{
+  "name": "api-sistema-gerenciamento-projeto-extensao",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndrewsDutraDev/api-sistema-gerenciamento-projeto-extensao.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndrewsDutraDev/api-sistema-gerenciamento-projeto-extensao/issues"
+  },
+  "homepage": "https://github.com/AndrewsDutraDev/api-sistema-gerenciamento-projeto-extensao#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sucrase": "^3.28.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.26.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.7.1"
+  }
+}
