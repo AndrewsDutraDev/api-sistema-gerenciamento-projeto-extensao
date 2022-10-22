@@ -1,5 +1,8 @@
 import { ObjectId } from 'mongodb';
+import jwt from 'jsonwebtoken';
 import connection from './mongoConnection';
+
+const SECRET = 'andrews250500';
 
 const getAll = async () => {
   const db = await connection();
@@ -36,6 +39,31 @@ const updateOneUser = async ({ id, email, password }) => {
   return { id, email };
 };
 
-const login = async () => null;
+const login = async ({ email, password }) => {
+  const db = await connection();
+  const user = await db.collection('users').findOne({ email, password });
+  return user;
+};
 
-export { getAll, login, newUser, userExists, deleteOneUser, updateOneUser };
+const requestLogin = async (req, res) => {
+  const { email, password } = req.body;
+  const usuario = await login({ email, password });
+
+  if (!usuario) return res.status(401).json({ message: 'Usuário não encontrado' });
+
+  const { _id } = usuario;
+
+  const newToken = jwt.sign(
+    {
+      userId: _id,
+      email,
+    },
+    SECRET,
+    {
+      expiresIn: 86400,
+    },
+  );
+  return res.status(200).json({ token: newToken });
+};
+
+export { getAll, login, newUser, userExists, deleteOneUser, updateOneUser, requestLogin };
