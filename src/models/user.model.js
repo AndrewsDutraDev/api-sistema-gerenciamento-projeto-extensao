@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb';
 import jwt from 'jsonwebtoken';
 import connection from './mongoConnection';
+import bcrypt from 'bcrypt';
 
 const SECRET = 'andrews250500';
 
@@ -11,7 +12,9 @@ const getAll = async () => {
 
 const newUser = async ({ email, password }) => {
   const db = await connection();
-  const user = await db.collection('users').insertOne({ email, password });
+  const salt = await bcrypt.genSalt(15);
+  const hashedPassword = await bcrypt.hash(password, salt);
+  const user = await db.collection('users').insertOne({ email, password: hashedPassword });
   const { insertedId: id } = user;
   return { email, _id: id };
 };
@@ -41,8 +44,15 @@ const updateOneUser = async ({ id, email, password }) => {
 
 const login = async ({ email, password }) => {
   const db = await connection();
-  const user = await db.collection('users').findOne({ email, password });
-  return user;
+  const user = await db.collection('users').findOne({ email });
+  let validPassword;
+  if (user) {
+    validPassword = await bcrypt.compare(password, user.password, null);
+  }
+  if (validPassword) {
+    return true;
+  }
+  return null;
 };
 
 const requestLogin = async (req, res) => {

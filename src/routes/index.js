@@ -14,7 +14,7 @@ routes.get('/', (req, res) => {
   res.status(200).json({ ok: 'connected' });
 });
 
-routes.post('/registrar', VerifyToken, createNewUser);
+routes.post('/registrar', createNewUser);
 
 routes.get('/usuarios', VerifyToken, getAll);
 
