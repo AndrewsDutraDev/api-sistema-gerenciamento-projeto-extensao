@@ -2,6 +2,11 @@ import { ObjectId } from 'mongodb';
 import jwt from 'jsonwebtoken';
 import connection from './mongoConnection';
 
+const getAll = async () => {
+  const db = await connection();
+  return db.collection('projects').find().toArray();
+};
+
 const projectExists = async ({ title, coordinatorId, id }) => {
   const db = await connection();
   let project = null;
@@ -35,4 +40,4 @@ const deleteOneProject = async ({ id }) => {
   return { id };
 };
 
-export { projectExists, newProject, deleteOneProject };
+export { projectExists, newProject, deleteOneProject, getAll };

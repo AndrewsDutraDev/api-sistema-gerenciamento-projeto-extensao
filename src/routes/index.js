@@ -4,7 +4,7 @@ import {
   getAll, createNewUser, deleteUser, updateUser,
 } from '../controller/usuario.controller';
 
-import { createNewProject, deleteProject } from '../controller/projeto.controller';
+import { getProjects, createNewProject, deleteProject } from '../controller/projeto.controller';
 
 import VerifyToken from '../middleware/usuario.middleware';
 
@@ -24,7 +24,7 @@ routes.delete('/usuarios/:id', VerifyToken, deleteUser);
 
 routes.put('/usuarios/:id', VerifyToken, updateUser);
 
-routes.get('/projetos', getAll);
+routes.get('/projetos', getProjects);
 
 routes.post('/projetos/novo', createNewProject);
 

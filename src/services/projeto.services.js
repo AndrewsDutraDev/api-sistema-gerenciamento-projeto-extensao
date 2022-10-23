@@ -1,4 +1,9 @@
-import { projectExists, newProject, deleteOneProject } from '../models/projeto.model';
+import { getAll, projectExists, newProject, deleteOneProject } from '../models/projeto.model';
+
+const getAllProjects = async () => {
+  const projects = await getAll();
+  return projects;
+};
 
 const createProject = async ({
   title, extensionCenter, unity, modality, mainArea, secondArea,
@@ -25,4 +30,4 @@ const toDelete = async (id) => {
   return project;
 };
 
-export { createProject, toDelete };
+export { getAllProjects, createProject, toDelete };

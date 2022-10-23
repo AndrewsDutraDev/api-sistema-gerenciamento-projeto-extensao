@@ -1,4 +1,10 @@
-import { createProject, toDelete } from '../services/projeto.services';
+import { createProject, toDelete, getAllProjects } from '../services/projeto.services';
+
+const getProjects = async (req, res) => {
+  const projects = await getAllProjects();
+
+  return res.status(200).json(projects);
+};
 
 const createNewProject = async (req, res) => {
   const {
@@ -22,4 +28,4 @@ const deleteProject = async (req, res) => {
   return res.status(200).json(project);
 };
 
-export { createNewProject, deleteProject };
+export { createNewProject, deleteProject, getProjects };
