@@ -32,7 +32,7 @@ const newProject = async ({
 const deleteOneProject = async ({ id }) => {
   const db = await connection();
   await db.collection('projects').deleteOne({ _id: ObjectId(id) });
-  // return
+  return { id };
 };
 
 export { projectExists, newProject, deleteOneProject };
