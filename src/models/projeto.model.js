@@ -40,4 +40,19 @@ const deleteOneProject = async ({ id }) => {
   return { id };
 };
 
-export { projectExists, newProject, deleteOneProject, getAll };
+const updateOneProject = async ({
+  id, title, extensionCenter, unity, modality, mainArea, secondArea, sustainableGoals,
+  coordinatorName, coordinatorId, contactEmail, abstract,
+  startDate, endDate, goals, usefulLinks, address, workload,
+  methodology, duration, isVisible
+}) => {
+  const db = await connection();
+  await db.collection('projects').updateOne({ _id: ObjectId(id) }, { $set: {
+    title, extensionCenter, unity, modality, mainArea, secondArea, sustainableGoals,
+    coordinatorName, coordinatorId, contactEmail, abstract,
+    startDate, endDate, goals, usefulLinks, address, workload,
+    methodology, duration, isVisible } });
+  return { id, title, coordinatorId };
+};
+
+export { projectExists, newProject, deleteOneProject, getAll, updateOneProject };

@@ -1,4 +1,4 @@
-import { getAll, projectExists, newProject, deleteOneProject } from '../models/projeto.model';
+import { getAll, projectExists, newProject, deleteOneProject, updateOneProject } from '../models/projeto.model';
 
 const getAllProjects = async () => {
   const projects = await getAll();
@@ -30,4 +30,22 @@ const toDelete = async (id) => {
   return project;
 };
 
-export { getAllProjects, createProject, toDelete };
+const toUpdateProject = async ({
+  id, title, extensionCenter, unity, modality, mainArea, secondArea, sustainableGoals,
+  coordinatorName, coordinatorId, contactEmail, abstract,
+  startDate, endDate, goals, usefulLinks, address, workload,
+  methodology, duration, isVisible
+}) => {
+  const userExist = await projectExists({ id });
+  if (!userExist) return { message: 'Usuário não encontrado' };
+
+  const user = await updateOneProject({
+    id, title, extensionCenter, unity, modality, mainArea, secondArea, sustainableGoals,
+    coordinatorName, coordinatorId, contactEmail, abstract,
+    startDate, endDate, goals, usefulLinks, address, workload,
+    methodology, duration, isVisible
+  });
+  return user;
+};
+
+export { getAllProjects, createProject, toDelete, toUpdateProject };
