@@ -60,8 +60,10 @@ const requestLogin = async (req, res) => {
   const usuario = await login({ email, password });
 
   if (!usuario) return res.status(401).json({ message: 'Usuário não encontrado' });
-
-  const { _id } = usuario;
+  const db = await connection();
+  const user = await db.collection('users').findOne({ email });
+  const user_email = user.email;
+  const { _id } = user;
 
   const newToken = jwt.sign(
     {
@@ -73,7 +75,7 @@ const requestLogin = async (req, res) => {
       expiresIn: 86400,
     },
   );
-  return res.status(200).json({ token: newToken });
+  return res.status(200).json({ token: newToken, user_email });
 };
 
 export { getAll, login, newUser, userExists, deleteOneUser, updateOneUser, requestLogin };

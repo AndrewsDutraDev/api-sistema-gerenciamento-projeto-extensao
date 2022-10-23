@@ -14,11 +14,11 @@ routes.get('/', (req, res) => {
   res.status(200).json({ ok: 'connected' });
 });
 
-routes.post('/registrar', createNewUser);
+routes.post('/registrar', VerifyToken, createNewUser);
 
 routes.get('/usuarios', VerifyToken, getAll);
 
-routes.get('/login', requestLogin);
+routes.post('/login', requestLogin);
 
 routes.delete('/usuarios/:id', VerifyToken, deleteUser);
 
