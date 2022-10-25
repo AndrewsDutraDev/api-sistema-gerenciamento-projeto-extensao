@@ -55,4 +55,9 @@ const updateOneProject = async ({
   return { id, title, coordinatorId };
 };
 
-export { projectExists, newProject, deleteOneProject, getAll, updateOneProject };
+const findOneProject = async ({ id }) => {
+  const db = await connection();
+  return db.collection('projects').findOne({ _id: ObjectId(id) });
+};
+
+export { projectExists, newProject, deleteOneProject, getAll, updateOneProject, findOneProject };

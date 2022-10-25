@@ -1,4 +1,4 @@
-import { createProject, toDelete, getAllProjects, toUpdateProject } from '../services/projeto.services';
+import { createProject, toDelete, getAllProjects, toUpdateProject, toFindProject } from '../services/projeto.services';
 
 const getProjects = async (req, res) => {
   const projects = await getAllProjects();
@@ -46,4 +46,10 @@ const updateProject = async (req, res) => {
   return res.status(200).json(projectUpdate);
 };
 
-export { createNewProject, deleteProject, getProjects, updateProject };
+const getOneProject = async (req, res) => {
+  const { id } = req.params;
+  const project = await toFindProject({ id });
+  return res.status(200).json(project);
+};
+
+export { createNewProject, deleteProject, getProjects, updateProject, getOneProject };
