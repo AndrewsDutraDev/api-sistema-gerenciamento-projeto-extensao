@@ -8,6 +8,7 @@ const getAll = async (req, res) => {
     {
       email: user.email,
       _id: user[`${id}`],
+      role: user.role,
     }
   ));
 
@@ -15,8 +16,8 @@ const getAll = async (req, res) => {
 };
 
 const createNewUser = async (req, res) => {
-  const { email, password } = req.body;
-  const { email: mail, _id } = await createUser({ email, password });
+  const { email, password, role, name } = req.body;
+  const { email: mail, _id } = await createUser({ email, password, role, name });
   return res.status(200).json({ mail, _id });
 };
 
@@ -27,10 +28,10 @@ const deleteUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, role, name } = req.body;
   const { id } = req.params;
 
-  const userUpdate = await toUpdate({ id, email, password });
+  const userUpdate = await toUpdate({ id, email, password, role, name });
   return res.status(200).json(userUpdate);
 };
 

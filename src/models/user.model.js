@@ -10,11 +10,11 @@ const getAll = async () => {
   return db.collection('users').find().toArray();
 };
 
-const newUser = async ({ email, password }) => {
+const newUser = async ({ email, password, role, name }) => {
   const db = await connection();
   const salt = await bcrypt.genSalt(15);
   const hashedPassword = await bcrypt.hash(password, salt);
-  const user = await db.collection('users').insertOne({ email, password: hashedPassword });
+  const user = await db.collection('users').insertOne({ email, password: hashedPassword, role, name });
   const { insertedId: id } = user;
   return { email, _id: id };
 };
@@ -36,9 +36,9 @@ const deleteOneUser = async ({ id }) => {
   return { id };
 };
 
-const updateOneUser = async ({ id, email, password }) => {
+const updateOneUser = async ({ id, email, password, role, name }) => {
   const db = await connection();
-  await db.collection('users').updateOne({ _id: ObjectId(id) }, { $set: { email, password } });
+  await db.collection('users').updateOne({ _id: ObjectId(id) }, { $set: { email, password, role, name } });
   return { id, email };
 };
 

@@ -6,11 +6,11 @@ const todos = async () => {
   return users;
 };
 
-const createUser = async ({ email, password }) => {
+const createUser = async ({ email, password, role, name }) => {
   const userExist = await userExists({ email });
   if (userExist) return userExist;
 
-  const user = await newUser({ email, password });
+  const user = await newUser({ email, password, role, name });
   return user;
 };
 
@@ -21,11 +21,11 @@ const toDelete = async (id) => {
   return user;
 };
 
-const toUpdate = async ({ id, email, password }) => {
+const toUpdate = async ({ id, email, password, role, name}) => {
   const userExist = await userExists({ id });
   if (!userExist) return { message: 'Usuário não encontrado' };
 
-  const user = await updateOneUser({ id, email, password })
+  const user = await updateOneUser({ id, email, password, role, name })
   return user;
 };
 
