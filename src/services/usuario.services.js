@@ -1,4 +1,4 @@
-import { getAll, newUser, userExists, deleteOneUser, updateOneUser } from '../models/user.model';
+import { getAll, newUser, userExists, deleteOneUser, updateOneUser, findOneUser } from '../models/user.model';
 
 const todos = async () => {
   const users = await getAll();
@@ -29,6 +29,13 @@ const toUpdate = async ({ id, email, password, role, name}) => {
   return user;
 };
 
+const toFindUser = async (id) => {
+  const userExist = await userExists({ id });
+  if (!userExist) return { message: 'Projeto não encontrado' };
+  const project = await findOneUser({ id });
+  return project;
+};
+
 const login = async () => null;
 
-export { todos, createUser, login, toDelete, toUpdate };
+export { todos, createUser, login, toDelete, toUpdate, toFindUser };

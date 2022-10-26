@@ -1,4 +1,4 @@
-import { todos, createUser, toDelete, toUpdate } from '../services/usuario.services';
+import { todos, createUser, toDelete, toUpdate, toFindUser } from '../services/usuario.services';
 
 const getAll = async (req, res) => {
   const users = await todos();
@@ -9,6 +9,7 @@ const getAll = async (req, res) => {
       email: user.email,
       _id: user[`${id}`],
       role: user.role,
+      name: user.name,
     }
   ));
 
@@ -35,6 +36,12 @@ const updateUser = async (req, res) => {
   return res.status(200).json(userUpdate);
 };
 
+const getOneUser = async (req, res) => {
+  const { id } = req.params;
+  const user = await toFindUser({ id });
+  return res.status(200).json(user);
+};
+
 const login = async () => null;
 
-export { getAll, login, createNewUser, deleteUser, updateUser };
+export { getAll, login, createNewUser, deleteUser, updateUser, getOneUser };

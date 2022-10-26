@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { requestLogin } from '../models/user.model';
 import {
-  getAll, createNewUser, deleteUser, updateUser,
+  getAll, createNewUser, deleteUser, updateUser, getOneUser,
 } from '../controller/usuario.controller';
 
 import { getProjects, createNewProject, deleteProject, updateProject, getOneProject } from '../controller/projeto.controller';
@@ -17,6 +17,8 @@ routes.get('/', (req, res) => {
 routes.post('/registrar', VerifyToken, createNewUser);
 
 routes.get('/usuarios', VerifyToken, getAll);
+
+routes.get('/usuarios/:id', VerifyToken, getOneUser);
 
 routes.post('/login', requestLogin);
 

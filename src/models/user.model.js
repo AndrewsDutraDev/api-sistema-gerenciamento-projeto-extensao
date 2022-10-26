@@ -42,6 +42,11 @@ const updateOneUser = async ({ id, email, password, role, name }) => {
   return { id, email };
 };
 
+const findOneUser = async ({ id }) => {
+  const db = await connection();
+  return db.collection('users').findOne({ _id: ObjectId(id) });
+};
+
 const login = async ({ email, password }) => {
   const db = await connection();
   const user = await db.collection('users').findOne({ email });
@@ -75,7 +80,7 @@ const requestLogin = async (req, res) => {
       expiresIn: 86400,
     },
   );
-  return res.status(200).json({ token: newToken, user_email, name, role });
+  return res.status(200).json({ token: newToken, user_email, name, role, id: _id });
 };
 
-export { getAll, login, newUser, userExists, deleteOneUser, updateOneUser, requestLogin };
+export { getAll, login, newUser, userExists, deleteOneUser, updateOneUser, requestLogin, findOneUser };
