@@ -63,7 +63,7 @@ const requestLogin = async (req, res) => {
   const db = await connection();
   const user = await db.collection('users').findOne({ email });
   const user_email = user.email;
-  const { _id } = user;
+  const { _id, name, role } = user;
 
   const newToken = jwt.sign(
     {
@@ -75,7 +75,7 @@ const requestLogin = async (req, res) => {
       expiresIn: 86400,
     },
   );
-  return res.status(200).json({ token: newToken, user_email });
+  return res.status(200).json({ token: newToken, user_email, name, role });
 };
 
 export { getAll, login, newUser, userExists, deleteOneUser, updateOneUser, requestLogin };
