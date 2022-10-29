@@ -8,13 +8,13 @@ const getProjects = async (req, res) => {
 
 const createNewProject = async (req, res) => {
   const {
-    title, extensionCenter, unity, modality, mainArea, secondArea,
+    title, unity, modality, mainArea, secondArea,
     sustainableGoals, coordinatorName, coordinatorId, contactEmail,
     abstract, startDate, endDate, goals, usefulLinks, address, workload,
     methodology, duration, isVisible
   } = req.body;
   const project = await createProject({
-    title, extensionCenter, unity, modality, mainArea,
+    title, unity, modality, mainArea,
     secondArea, sustainableGoals, coordinatorName, coordinatorId,
     contactEmail, abstract, startDate, endDate, goals, usefulLinks,
     address, workload, methodology, duration, isVisible
@@ -30,7 +30,7 @@ const deleteProject = async (req, res) => {
 
 const updateProject = async (req, res) => {
   const {
-    title, extensionCenter, unity, modality, mainArea, secondArea, sustainableGoals,
+    title, unity, modality, mainArea, secondArea, sustainableGoals,
     coordinatorName, coordinatorId, contactEmail, abstract,
     startDate, endDate, goals, usefulLinks, address, workload,
     methodology, duration, isVisible
@@ -38,7 +38,7 @@ const updateProject = async (req, res) => {
   const { id } = req.params;
 
   const projectUpdate = await toUpdateProject({
-    id, title, extensionCenter, unity, modality, mainArea, secondArea, sustainableGoals,
+    id, title, unity, modality, mainArea, secondArea, sustainableGoals,
     coordinatorName, coordinatorId, contactEmail, abstract,
     startDate, endDate, goals, usefulLinks, address, workload,
     methodology, duration, isVisible

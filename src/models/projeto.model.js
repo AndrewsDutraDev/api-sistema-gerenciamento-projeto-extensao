@@ -20,12 +20,12 @@ const projectExists = async ({ title, coordinatorId, id }) => {
 };
 
 const newProject = async ({
-  title, extensionCenter, unity, modality, mainArea, secondArea, sustainableGoals, coordinatorName,
+  title, unity, modality, mainArea, secondArea, sustainableGoals, coordinatorName,
   coordinatorId, contactEmail, abstract, startDate, endDate, goals, usefulLinks, address, workload,
   methodology, duration, isVisible }) => {
   const db = await connection();
   const project = await db.collection('projects').insertOne({
-    title, extensionCenter, unity, modality, mainArea, secondArea, sustainableGoals,
+    title, unity, modality, mainArea, secondArea, sustainableGoals,
     coordinatorName, coordinatorId, contactEmail, abstract,
     startDate, endDate, goals, usefulLinks, address, workload,
     methodology, duration, isVisible
@@ -41,14 +41,14 @@ const deleteOneProject = async ({ id }) => {
 };
 
 const updateOneProject = async ({
-  id, title, extensionCenter, unity, modality, mainArea, secondArea, sustainableGoals,
+  id, title, unity, modality, mainArea, secondArea, sustainableGoals,
   coordinatorName, coordinatorId, contactEmail, abstract,
   startDate, endDate, goals, usefulLinks, address, workload,
   methodology, duration, isVisible
 }) => {
   const db = await connection();
   await db.collection('projects').updateOne({ _id: ObjectId(id) }, { $set: {
-    title, extensionCenter, unity, modality, mainArea, secondArea, sustainableGoals,
+    title, unity, modality, mainArea, secondArea, sustainableGoals,
     coordinatorName, coordinatorId, contactEmail, abstract,
     startDate, endDate, goals, usefulLinks, address, workload,
     methodology, duration, isVisible } });

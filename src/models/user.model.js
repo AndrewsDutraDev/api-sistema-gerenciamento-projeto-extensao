@@ -38,7 +38,9 @@ const deleteOneUser = async ({ id }) => {
 
 const updateOneUser = async ({ id, email, password, role, name }) => {
   const db = await connection();
-  await db.collection('users').updateOne({ _id: ObjectId(id) }, { $set: { email, password, role, name } });
+  const salt = await bcrypt.genSalt(15);
+  const hashedPassword = await bcrypt.hash(password, salt);
+  await db.collection('users').updateOne({ _id: ObjectId(id) }, { $set: { email, password: hashedPassword, role, name } });
   return { id, email };
 };
 

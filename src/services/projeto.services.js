@@ -6,7 +6,7 @@ const getAllProjects = async () => {
 };
 
 const createProject = async ({
-  title, extensionCenter, unity, modality, mainArea, secondArea,
+  title, unity, modality, mainArea, secondArea,
   sustainableGoals, coordinatorName, coordinatorId, contactEmail,
   abstract, startDate, endDate, goals, usefulLinks, address, workload,
   methodology, duration, isVisible
@@ -15,7 +15,7 @@ const createProject = async ({
   if (projectExist) return projectExist;
 
   const project = await newProject({
-    title, extensionCenter, unity, modality, mainArea, secondArea,
+    title, unity, modality, mainArea, secondArea,
     sustainableGoals, coordinatorName, coordinatorId, contactEmail,
     abstract, startDate, endDate, goals, usefulLinks, address, workload,
     methodology, duration, isVisible
@@ -31,7 +31,7 @@ const toDelete = async (id) => {
 };
 
 const toUpdateProject = async ({
-  id, title, extensionCenter, unity, modality, mainArea, secondArea, sustainableGoals,
+  id, title, unity, modality, mainArea, secondArea, sustainableGoals,
   coordinatorName, coordinatorId, contactEmail, abstract,
   startDate, endDate, goals, usefulLinks, address, workload,
   methodology, duration, isVisible
@@ -40,7 +40,7 @@ const toUpdateProject = async ({
   if (!userExist) return { message: 'Usuário não encontrado' };
 
   const user = await updateOneProject({
-    id, title, extensionCenter, unity, modality, mainArea, secondArea, sustainableGoals,
+    id, title, unity, modality, mainArea, secondArea, sustainableGoals,
     coordinatorName, coordinatorId, contactEmail, abstract,
     startDate, endDate, goals, usefulLinks, address, workload,
     methodology, duration, isVisible
