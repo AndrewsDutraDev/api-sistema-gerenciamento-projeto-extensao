@@ -20,6 +20,7 @@
   "homepage": "https://github.com/AndrewsDutraDev/api-sistema-gerenciamento-projeto-extensao#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
