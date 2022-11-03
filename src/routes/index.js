@@ -4,7 +4,7 @@ import {
   getAll, createNewUser, deleteUser, updateUser, getOneUser,
 } from '../controller/usuario.controller';
 
-import { getProjects, createNewProject, deleteProject, updateProject, getOneProject } from '../controller/projeto.controller';
+import { getProjects, createNewProject, deleteProject, updateProject, getOneProject, getProjectsSearched } from '../controller/projeto.controller';
 
 import VerifyToken from '../middleware/usuario.middleware';
 
@@ -29,6 +29,8 @@ routes.put('/usuarios/:id', VerifyToken, updateUser);
 // Projetos
 
 routes.get('/projetos', getProjects);
+
+routes.post('/busca-projetos', getProjectsSearched);
 
 routes.get('/projetos/:id', getOneProject);
 

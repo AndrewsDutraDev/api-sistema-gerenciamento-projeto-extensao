@@ -1,8 +1,13 @@
-import { createProject, toDelete, getAllProjects, toUpdateProject, toFindProject } from '../services/projeto.services';
+import { createProject, toDelete, getAllProjects, toUpdateProject, toFindProject, getAllProjectsSearch } from '../services/projeto.services';
 
 const getProjects = async (req, res) => {
   const projects = await getAllProjects();
 
+  return res.status(200).json(projects);
+};
+
+const getProjectsSearched = async (req, res) => {
+  const projects = await getAllProjectsSearch(req.body);
   return res.status(200).json(projects);
 };
 
@@ -52,4 +57,4 @@ const getOneProject = async (req, res) => {
   return res.status(200).json(project);
 };
 
-export { createNewProject, deleteProject, getProjects, updateProject, getOneProject };
+export { createNewProject, deleteProject, getProjects, updateProject, getOneProject, getProjectsSearched };

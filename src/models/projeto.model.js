@@ -7,6 +7,22 @@ const getAll = async () => {
   return db.collection('projects').find().toArray();
 };
 
+const getAllSearch = async (data) => {
+  const db = await connection();
+  const dataFields = [];
+  for (const [key, value] of Object.entries(data)) {
+    if (value) {
+			dataFields.push({
+				[key]: { $eq: value }
+			})
+		}
+	}
+	return db.collection('projects').find({
+		$and: dataFields,
+	}).toArray();
+
+};
+
 const projectExists = async ({ title, coordinatorId, id }) => {
   const db = await connection();
   let project = null;
@@ -60,4 +76,4 @@ const findOneProject = async ({ id }) => {
   return db.collection('projects').findOne({ _id: ObjectId(id) });
 };
 
-export { projectExists, newProject, deleteOneProject, getAll, updateOneProject, findOneProject };
+export { projectExists, newProject, deleteOneProject, getAll, updateOneProject, findOneProject, getAllSearch };

@@ -1,7 +1,12 @@
-import { getAll, projectExists, newProject, deleteOneProject, updateOneProject, findOneProject } from '../models/projeto.model';
+import { getAll, projectExists, newProject, deleteOneProject, updateOneProject, findOneProject, getAllSearch } from '../models/projeto.model';
 
 const getAllProjects = async () => {
   const projects = await getAll();
+  return projects;
+};
+
+const getAllProjectsSearch = async (data) => {
+  const projects = await getAllSearch(data);
   return projects;
 };
 
@@ -55,4 +60,4 @@ const toFindProject = async (id) => {
   return project;
 };
 
-export { getAllProjects, createProject, toDelete, toUpdateProject, toFindProject };
+export { getAllProjects, createProject, toDelete, toUpdateProject, toFindProject, getAllProjectsSearch };
