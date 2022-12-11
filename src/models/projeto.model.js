@@ -10,16 +10,34 @@ const getAll = async () => {
 const getAllSearch = async (data) => {
   const db = await connection();
   const dataFields = [];
+	var titulo
   for (const [key, value] of Object.entries(data)) {
-    if (value) {
+    if (value && key != "title") {
 			dataFields.push({
 				[key]: { $eq: value }
 			})
 		}
+		if (value && key == "title"){
+			titulo = value
+		}
 	}
-	return db.collection('projects').find({
-		$and: dataFields,
-	}).toArray();
+	if (dataFields.length && !titulo){
+		return db.collection('projects').find({
+			$and: dataFields,
+		}).toArray();
+	}
+	if (dataFields.length && titulo){
+		return db.collection('projects').find({
+			$and: dataFields,
+			title: new RegExp(titulo, 'i')
+		}).toArray();
+	}
+	if (!dataFields.length && titulo){
+		return db.collection('projects').find({
+			title: new RegExp(titulo, 'i')
+		}).toArray();
+	}
+	return dataFields
 
 };
 
